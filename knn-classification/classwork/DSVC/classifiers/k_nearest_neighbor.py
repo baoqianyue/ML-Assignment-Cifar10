@@ -120,7 +120,18 @@ class KNearestNeighbor(object):
         # HINT: Try to formulate the l2 distance using matrix multiplication    #
         #       and two broadcast sums.                                         #
         #########################################################################
-        pass
+        # 需要返回一个(500,5000)的距离矩阵，self.X_train为(5000,3072),X为(500.3072)
+        # 使用完全平方公式(a-b)^2 = a^2 + b^2 - 2ab
+        # 所以需要构建矩阵，乘法左边为X，右边为X_train,即X为a，train_X为b
+        # 先计算a^2
+        temp_X = np.sum(np.square(X), axis=1).reshape(num_test, 1)
+        dists += temp_X
+        # 计算b^2
+        dists += np.sum(np.square(self.X_train), axis=1).reshape(1, num_train)
+        # 计算2ab
+        dists -= 2 * np.dot(X, self.X_train.T)
+        # 开根号
+        dists = np.sqrt(dists)
         #########################################################################
         #                         END OF YOUR CODE                              #
         #########################################################################
