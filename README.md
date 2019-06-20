@@ -4,6 +4,8 @@
 
 数字媒体技术16071041班1组 组长：鲍骞月    
 
+test
+
 ## 大作业任务  
 
 ### 任务1.k-Nearest Neighbor classifier
