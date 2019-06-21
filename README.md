@@ -6,7 +6,7 @@
 
 ## 大作业任务  
 
-### 任务1.k-Nearest Neighbor classifier
+### [任务1.k-Nearest Neighbor classifier](knn-classification)
 
 Jupyter Notebook **knn.ipynb**将引导你实现k-NN分类器。
 
@@ -19,7 +19,7 @@ Jupyter Notebook **knn.ipynb**将引导你实现k-NN分类器。
 
 *暂时不考虑图像数据的特征提取以及其他更好的分类算法。*
 
-### 任务2.Two layers Neural Network(NN)    
+### [任务2.Two layers Neural Network(NN)](nn-classification)  
 
 提高分类准确度   
 This is your chance to show off! Try to get higher accuracy.
@@ -44,20 +44,25 @@ Design and implement a new type of feature and select an algorithm, and use them
 
 ### 鲍骞月   
 1. [x] kNN(矢量化距离计算)   
-2. [ ] NN(反向传播)       
-3. [ ] NN(随机梯度下降)       
+2. [ ] NN(反向传播)   
+3. [ ] NN(调整超参数(1))         
 
 ### 张泽亿   
 1. [x] kNN(半矢量化距离计算)    
-2. [ ] ..    
+2. [ ] NN(训练函数)      
+3. [ ] NN(预测函数)   
+4. [ ] NN(调整超参数(2))   
 
 ### 景金龙    
 1. [x] kNN(交叉验证)    
 2. [ ] NN(前向传播：计算损失)    
+3. [ ] NN(调整超参数(3))   
 
 ### 许瑞洋    
 1. [x] kNN(非矢量距离计算，预测函数)    
 2. [ ] NN(前向传播：计算预测分数)     
+3. [ ] NN(调整超参数(4))    
+
 
 ## 小组成员
 
