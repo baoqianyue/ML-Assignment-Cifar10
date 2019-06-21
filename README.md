@@ -44,7 +44,7 @@ Design and implement a new type of feature and select an algorithm, and use them
 
 ### 鲍骞月   
 1. [x] kNN(矢量化距离计算)   
-2. [ ] NN(方向传播)    
+2. [ ] NN(反向传播)       
 3. [ ] NN(随机梯度下降)       
 
 ### 张泽亿   
@@ -64,7 +64,7 @@ Design and implement a new type of feature and select an algorithm, and use them
 | Github                                             | 姓名   | 任务分工                      |
 | -------------------------------------------------- | ------ | ----------------------------- |
 | [BarackBao](https://github.com/shentibeitaokongle) | 鲍骞月 | 任务分配，kNN(矢量化距离计算)，NN(反向传播)    |
-| [MIKIMIKA](<https://github.com/MIKIMIKA>)          | 张泽亿 | kNN(半矢量距离计算)           |
+| [MIKIMIKA](<https://github.com/MIKIMIKA>)          | 张泽亿 | kNN(半矢量距离计算)，NN(随机梯度下降)          |
 | [jjl1203](<https://github.com/jjl1203>)            | 景金龙 | kNN(交叉验证)，NN(前向传播：计算损失)                  |
 | [MissXdd](<https://github.com/MissXdd>)            | 许瑞洋 | kNN(非矢量距离计算，预测函数)，NN(前向传播：计算预测分数)           |
 
