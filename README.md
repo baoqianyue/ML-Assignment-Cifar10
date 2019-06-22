@@ -29,7 +29,12 @@ Design and implement a new type of feature and select an algorithm, and use them
 
 * 实现前馈传播算法   
 * 实现反向传播算法   
-* 实现优化算法    
+* 实现优化算法      
+
+#### 参考    
+
+* [理解softmax和softmax loss](https://blog.csdn.net/u014380165/article/details/77284921)    
+* [理解反向传播](https://blog.csdn.net/u014380165/article/details/71181256)    
 
 ### 任务3.卷积神经网络实现  
 
@@ -60,7 +65,7 @@ Design and implement a new type of feature and select an algorithm, and use them
 
 ### 许瑞洋    
 1. [x] kNN(非矢量距离计算，预测函数)    
-2. [ ] NN(前向传播：计算预测分数)     
+2. [x] NN(前向传播：计算预测分数)     
 3. [ ] NN(调整超参数)       
 
 
