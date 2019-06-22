@@ -1,4 +1,4 @@
-from __future__ import print_function
+# from __future__ import print_function
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -76,7 +76,8 @@ class TwoLayerNet(object):
         # Store the result in the scores variable, which should be an array of      #
         # shape (N, C).                                                             #
         #############################################################################
-        h_output = np.maximum(0, X.dot(W1) + b1) #(N,D) * (D,H) = (N,H)
+        h = X.dot(W1) + b1
+        h_output = np.maximum(0, h) #(N,D) * (D,H) = (N,H)
         scores = h_output.dot(W2) + b2
         #############################################################################
         #                              END OF YOUR CODE                             #
@@ -101,7 +102,9 @@ class TwoLayerNet(object):
         p = scores/sum_p
         loss = np.mean(-np.log(p[range(N),y]))
         #print(p[range(N,y])
-        loss += 0.5 * reg * (np.sum(W1*W1)+np.sum(W2*W2))
+        # loss += 0.5 * reg * (np.sum(W1*W1)+np.sum(W2*W2))
+        # baoqianyue review，去掉0.5 
+        loss += reg * (np.sum(W1 * W1) + np.sum(W2 * W2))
         #print(loss)
         #############################################################################
         #                              END OF YOUR CODE                             #
@@ -114,7 +117,34 @@ class TwoLayerNet(object):
         # and biases. Store the results in the grads dictionary. For example,       #
         # grads['W1'] should store the gradient on W1, and be a matrix of same size #
         #############################################################################
-        pass
+        # 1.计算softmax-loss对scores求导
+        dscores = p
+        # 对于每个样本k=y位置-1    
+        dscores[range(N), y] -= 1
+        dscores /= N
+        # 2.计算loss对W2的梯度  
+        # 链式法则，等于dscores * dscores/dW2   
+        # (10, 5) * (5, 3) -> (10, 3)
+        grads['W2'] = np.dot(h_output.T, dscores)
+        # 加上正则项的导数
+        # (10, 3)
+        grads['W2'] += 2 * reg * W2
+        # 3.计算loss对b2的梯度 
+        # (5, 3) -> (3, )
+        grads['b2'] =  np.sum(dscores, axis=0)
+        # 4.计算Loss对W1的梯度 
+        # 梯度先传递到隐藏层
+        # (5, 3) * (3, 10) -> (5, 10)
+        dh = np.dot(dscores, W2.T)
+        # 梯度经过ReLU
+        dh[h <= 0] = 0
+        # 梯度传递到W1
+        # (4, 5) * (5, 10) -> (4, 10)
+        grads['W1'] = np.dot(X.T, dh)
+        grads['W1'] += 2 * reg * W1
+        # 5.计算loss对b1的梯度
+        # (5, 10) -> (10, )
+        grads['b1'] = np.sum(dh, axis=0)
         #############################################################################
         #                              END OF YOUR CODE                             #
         #############################################################################
@@ -159,9 +189,6 @@ class TwoLayerNet(object):
             # them in X_batch and y_batch respectively.                             #
             #########################################################################
             pass
-            indices = np.random.choice(range(0,num_train),batch_size)
-            X_batch = X[indices]
-            y_batch = y[indices]
             #########################################################################
             #                             END OF YOUR CODE                          #
             #########################################################################
@@ -222,11 +249,6 @@ class TwoLayerNet(object):
         # TODO: Implement this function; it should be VERY simple!                #
         ###########################################################################
         pass
-        W1, b1 = self.params['W1'], self.params['b1']
-        W2, b2 = self.params['W2'], self.params['b2']
-        hidden_layer = np.maximum(0,X.dot(W1)+b1)
-        scores = hidden_layer.dot(W2)+b2
-        y_pred = np.argmax(scores,axis=1)
         ###########################################################################
         #                              END OF YOUR CODE                           #
         ###########################################################################

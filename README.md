@@ -49,7 +49,7 @@ Design and implement a new type of feature and select an algorithm, and use them
 
 ### 鲍骞月   
 1. [x] kNN(矢量化距离计算)   
-2. [ ] NN(反向传播)   
+2. [x] NN(反向传播)   
 3. [ ] NN(调整超参数)            
 
 ### 张泽亿   
@@ -60,7 +60,7 @@ Design and implement a new type of feature and select an algorithm, and use them
 
 ### 景金龙    
 1. [x] kNN(交叉验证)    
-2. [ ] NN(前向传播：计算损失)    
+2. [x] NN(前向传播：计算损失)    
 3. [ ] NN(调整超参数)      
 
 ### 许瑞洋    
