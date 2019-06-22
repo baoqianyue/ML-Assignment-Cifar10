@@ -1,4 +1,4 @@
-# from __future__ import print_function
+from __future__ import print_function
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -69,7 +69,6 @@ class TwoLayerNet(object):
         W1, b1 = self.params['W1'], self.params['b1']
         W2, b2 = self.params['W2'], self.params['b2']
         N, D = X.shape
-
         # Compute the forward pass
         scores = None
         #############################################################################
@@ -95,7 +94,15 @@ class TwoLayerNet(object):
         # in the variable loss, which should be a scalar. Use the Softmax           #
         # classifier loss.                                                          #
         #############################################################################
-        pass
+        # Softmax 
+        scores -= np.max(scores)
+        scores = np.exp(scores)
+        sum_p = np.sum(scores,axis=1).reshape(N,1)
+        p = scores/sum_p
+        loss = np.mean(-np.log(p[range(N),y]))
+        #print(p[range(N,y])
+        loss += 0.5 * reg * (np.sum(W1*W1)+np.sum(W2*W2))
+        #print(loss)
         #############################################################################
         #                              END OF YOUR CODE                             #
         #############################################################################
@@ -152,6 +159,9 @@ class TwoLayerNet(object):
             # them in X_batch and y_batch respectively.                             #
             #########################################################################
             pass
+            indices = np.random.choice(range(0,num_train),batch_size)
+            X_batch = X[indices]
+            y_batch = y[indices]
             #########################################################################
             #                             END OF YOUR CODE                          #
             #########################################################################
@@ -212,6 +222,11 @@ class TwoLayerNet(object):
         # TODO: Implement this function; it should be VERY simple!                #
         ###########################################################################
         pass
+        W1, b1 = self.params['W1'], self.params['b1']
+        W2, b2 = self.params['W2'], self.params['b2']
+        hidden_layer = np.maximum(0,X.dot(W1)+b1)
+        scores = hidden_layer.dot(W2)+b2
+        y_pred = np.argmax(scores,axis=1)
         ###########################################################################
         #                              END OF YOUR CODE                           #
         ###########################################################################
