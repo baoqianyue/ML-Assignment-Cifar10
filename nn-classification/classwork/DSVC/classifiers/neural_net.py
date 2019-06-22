@@ -188,7 +188,10 @@ class TwoLayerNet(object):
             # TODO: Create a random minibatch of training data and labels, storing  #
             # them in X_batch and y_batch respectively.                             #
             #########################################################################
-            pass
+            #随机选取，范围为numtrain,大小为batchsize,分别赋给X，ybatch 
+            sample_indices = np.random.choice(num_train,batch_size)
+            X_batch = X[sample_indices]
+            y_batch = y[sample_indices]
             #########################################################################
             #                             END OF YOUR CODE                          #
             #########################################################################
@@ -203,7 +206,11 @@ class TwoLayerNet(object):
             # using stochastic gradient descent. You'll need to use the gradients   #
             # stored in the grads dictionary defined above.                         #
             #########################################################################
-            pass
+            #梯度下降调整W和b
+            self.params['W1'] += -learning_rate * grads['W1']
+            self.params['b1'] += -learning_rate * grads['b1']
+            self.params['W2'] += -learning_rate * grads['W2']
+            self.params['b2'] += -learning_rate * grads['b2']
             #########################################################################
             #                             END OF YOUR CODE                          #
             #########################################################################
@@ -248,7 +255,12 @@ class TwoLayerNet(object):
         ###########################################################################
         # TODO: Implement this function; it should be VERY simple!                #
         ###########################################################################
-        pass
+        #根据W，b预测标签
+        z = np.dot(X, self.params['W1']) + self.params['b1']
+        h = np.maximum(z, 0)
+        scores = np.dot(h, self.params['W2']) + self.params['b2']
+        #y_pred shape(N,)纵向选取最大值的标签
+        y_pred = np.argmax(scores, axis=1)
         ###########################################################################
         #                              END OF YOUR CODE                           #
         ###########################################################################
