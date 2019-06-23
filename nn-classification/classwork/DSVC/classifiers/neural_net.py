@@ -215,8 +215,8 @@ class TwoLayerNet(object):
             #                             END OF YOUR CODE                          #
             #########################################################################
 
-            if verbose and it % 100 == 0:
-               print('iteration %d / %d: loss %f' % (it, num_iters, loss))
+            if verbose and it % 500 == 0:
+                print('iteration %d / %d: loss %f' % (it, num_iters, loss))
 
             # Every epoch, check train and val accuracy and decay learning rate.
             if it % iterations_per_epoch == 0:
