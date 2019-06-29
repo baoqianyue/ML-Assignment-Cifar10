@@ -179,7 +179,12 @@ class TwoLayerNet(object):
         loss_history = []
         train_acc_history = []
         val_acc_history = []
-
+        #动量mu
+        vgw1 = 0
+        vgw2 = 0
+        vgb1 = 0
+        vgb2 = 0
+        mu = 0.9
         for it in range(num_iters):
             X_batch = None
             y_batch = None
@@ -207,10 +212,23 @@ class TwoLayerNet(object):
             # stored in the grads dictionary defined above.                         #
             #########################################################################
             #梯度下降调整W和b
-            self.params['W1'] += -learning_rate * grads['W1']
-            self.params['b1'] += -learning_rate * grads['b1']
-            self.params['W2'] += -learning_rate * grads['W2']
-            self.params['b2'] += -learning_rate * grads['b2']
+            #self.params['W1'] += -learning_rate * grads['W1']
+            #self.params['b1'] += -learning_rate * grads['b1']
+            #self.params['W2'] += -learning_rate * grads['W2']
+            #self.params['b2'] += -learning_rate * grads['b2']
+
+            #动量更新W1
+            vgw1 = mu * vgw1 + (1-mu) * grads['W1']
+            self.params['W1'] = self.params['W1'] - learning_rate * vgw1
+            #动量更新W2
+            vgw2 = mu * vgw2 + (1-mu) * grads['W2']
+            self.params['W2'] = self.params['W2'] - learning_rate * vgw2
+            #动量更新b1
+            vgb1 = mu * vgb1 + (1-mu) * grads['b1']
+            self.params['b1'] = self.params['b1'] - learning_rate * vgb1
+            #动量更新b2
+            vgb2 = mu * vgb2 + (1-mu) * grads['b2']
+            self.params['b2'] = self.params['b2'] - learning_rate * vgb2
             #########################################################################
             #                             END OF YOUR CODE                          #
             #########################################################################
