@@ -37,8 +37,10 @@ class TwoLayerNet(object):
         - output_size: The number of classes C.
         """
         self.params = {}
+        # W1(4,10), B1(10,)
         self.params['W1'] = std * np.random.randn(input_size, hidden_size)
         self.params['b1'] = np.zeros(hidden_size)
+        # W2(10,3), B2(3,)
         self.params['W2'] = std * np.random.randn(hidden_size, output_size)
         self.params['b2'] = np.zeros(output_size)
 
@@ -66,7 +68,9 @@ class TwoLayerNet(object):
           with respect to the loss function; has the same keys as self.params.
         """
         # Unpack variables from the params dictionary
+        # (4,10), (10,)
         W1, b1 = self.params['W1'], self.params['b1']
+        # (10, 3) (3,)
         W2, b2 = self.params['W2'], self.params['b2']
         N, D = X.shape
         # Compute the forward pass
@@ -76,8 +80,11 @@ class TwoLayerNet(object):
         # Store the result in the scores variable, which should be an array of      #
         # shape (N, C).                                                             #
         #############################################################################
+        # (5,4) * (4,10) -> (5,10) ; (5, 10) + (10,) -> (5,10)
         h = X.dot(W1) + b1
+        # relu
         h_output = np.maximum(0, h) #(N,D) * (D,H) = (N,H)
+        # (5,10) * (10,3) -> (5,3); (5,3) + (3,)
         scores = h_output.dot(W2) + b2
         #############################################################################
         #                              END OF YOUR CODE                             #
@@ -277,7 +284,6 @@ class TwoLayerNet(object):
         z = np.dot(X, self.params['W1']) + self.params['b1']
         h = np.maximum(z, 0)
         scores = np.dot(h, self.params['W2']) + self.params['b2']
-        #y_pred shape(N,)纵向选取最大值的标签
         y_pred = np.argmax(scores, axis=1)
         ###########################################################################
         #                              END OF YOUR CODE                           #
